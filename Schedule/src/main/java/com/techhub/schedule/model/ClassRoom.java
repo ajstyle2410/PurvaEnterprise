@@ -15,23 +15,14 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-
-public class Staff {
+public class ClassRoom {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int StaffId;
+	private int ClassId;
 	@Column(nullable = false)
-    private String StaffName;
+	private String ClassRoomNo;
 	@Column(nullable = false)
-    private String StaffRole;
+	private String ClassFloor;
 	@Column(nullable = false)
-    private long StaffContact;
-	@Column(nullable = false)
-	private String StaffEmail;
-	@Column(nullable = false)
-	private long StaffPassword;
-	@Column(nullable = false)
-	private long StaffReapetPassword;
-
-    
+	private String ClassLimit;
 }

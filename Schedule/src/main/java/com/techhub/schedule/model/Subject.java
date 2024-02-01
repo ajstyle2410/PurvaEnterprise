@@ -15,23 +15,10 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-
-public class Staff {
+public class Subject{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int StaffId;
+	 private int SubjectId;
 	@Column(nullable = false)
-    private String StaffName;
-	@Column(nullable = false)
-    private String StaffRole;
-	@Column(nullable = false)
-    private long StaffContact;
-	@Column(nullable = false)
-	private String StaffEmail;
-	@Column(nullable = false)
-	private long StaffPassword;
-	@Column(nullable = false)
-	private long StaffReapetPassword;
-
-    
+	 private String  SubjectName;
 }

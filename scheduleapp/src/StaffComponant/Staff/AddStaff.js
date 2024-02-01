@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Container, Form, Input } from "reactstrap";
 import axios from "axios";
-import StaffAPI from "../STAFFAPIS/StaffAPI";
+import StaffAPI from "../ScheduleAPIS/StaffAPI";
 import { ToastContainer, toast } from "react-toastify";
 
-// ... Other imports and components ...
 
 const AddStaff = () => {
   useEffect(() => {

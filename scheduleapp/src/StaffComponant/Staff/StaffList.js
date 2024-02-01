@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-import staff_api from "../STAFFAPIS/StaffAPI";
+import staff_api from "../ScheduleAPIS/StaffAPI";
 import "react-toastify/dist/ReactToastify.css";
 
 const StaffList = () => {

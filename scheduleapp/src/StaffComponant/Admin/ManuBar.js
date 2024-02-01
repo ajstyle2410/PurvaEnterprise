@@ -4,6 +4,9 @@ import '../CSS/AdminMenuBar.css';
 import AddStaff from '../Staff/AddStaff';
 import { Button, List, NavItem } from 'reactstrap';
 import StaffList from '../Staff/StaffList';
+import ClassRoomList from '../Classroom/ClassRoomList';
+import AddSubject from '../Subjects/AddSubject';
+import SubjectList from '../Subjects/SubjectList';
 const MenuBar = () => {
 
     return (<>
@@ -13,11 +16,16 @@ const MenuBar = () => {
                     <div className="position-sticky">
                         <div className="list-group list-group-flush mx-3 mt-4">
                             <a href="#" className="list-group-item list-group-item-action py-2 ripple" aria-current="true">
-                                <i className="fa fa-tachometer-alt fa-fw me-3"></i><span>Main dashboard</span>
+                                <i className="fa fa-tachometer fa-fw me-3"></i><span>Main dashboard</span>
                             </a>
-                            <div className="d-flex p-2">
-                                <div class="btn-group dropend">
-                                    <Button class="btn btn-success" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <hr/>
+                            <Link  to={"/"} className="list-group-item list-group-item-action py-2  ripple" aria-current="true">
+                                <i className="fa fa-calendar fa-fw me-3"></i><span>Schedule</span>
+                            </Link>
+
+                            <div className="d-flex mt-2">
+                                <div class="btn-group dropend  list-group-item list-group-item-action   ripple">
+                                <Button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
                                        STAFF RECORDS
                                     </Button>
                                     <ul class="dropdown-menu dropdown-menu-light">
@@ -32,23 +40,39 @@ const MenuBar = () => {
                                         </li>    <li><a class="dropdown-item" href="#">Separated link</a></li>
                                     </ul>
                                 </div>
+                            </div>  
+                            <hr/>
+                            <div className="d-flex">
+                                <div class="btn-group dropend list-group-item list-group-item-action   ripple">
+                                <Button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                                        ClASSROOM 
+                                    </Button>
+                                    <ul class="dropdown-menu dropdown-menu-light">
+                                        <li><Link className='list-group-item list-group-action'  to='classroomlist' element={<ClassRoomList/>}>classroom list</Link></li>
+                                        <li><Link className='list-group-item list-group-action'  to='/addclassroom' element={<AddStaff/>}>Add Classroom </Link></li>
+
+                                        <li><a class="dropdown-item" href="#">Separated link</a></li>
+                                    </ul>
+                                </div>
                             </div>
-                            <a href="#" className="list-group-item list-group-item-action py-2 ripple"><i
-                                className="fa fa-lock fa-fw me-3"></i><span>Password</span></a>
-                            <a href="#" className="list-group-item list-group-item-action py-2 ripple"><i
-                                className="fa fa-chart-line fa-fw me-3"></i><span>Analytics</span></a>
-                            <a href="#" className="list-group-item list-group-item-action py-2 ripple">
-                                <i className="fa fa-chart-pie fa-fw me-3"></i><span>SEO</span>
-                            </a>
-                            <a href="#" className="list-group-item list-group-item-action py-2 ripple"><i
-                                className="fa fa-chart-bar fa-fw me-3"></i><span>Orders</span></a>
-                            <a href="#" className="list-group-item list-group-item-action py-2 ripple"><i
-                                className="fa fa-globe fa-fw me-3"></i><span>International</span></a>
-                            <a href="#" className="list-group-item list-group-item-action py-2 ripple"><i
-                                className="fa fa-building fa-fw me-3"></i><span>Partners</span></a>
-                            <div className="d-flex p-2">
+                            <hr/>
+                            <div className="d-flex">
+                                <div class="btn-group dropend list-group-item list-group-item-action   ripple">
+                                <Button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                                        SUBJECT 
+                                    </Button>
+                                    <ul class="dropdown-menu dropdown-menu-light">
+                                        <li><Link className='list-group-item list-group-action'  to='subjectlist' element={<SubjectList/>}>Subject list</Link></li>
+                                        <li><Link className='list-group-item list-group-action'  to='/addsubject' element={<AddSubject/>}>Add Subject </Link></li>
+
+                                        <li><a class="dropdown-item" href="#">Separated link</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <hr/>
+                            
                                 <div class="btn-group dropend">
-                                    <Button class="btn btn-success d-flex " type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <Button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
                                         Dropdown
                                     </Button>
                                     <ul class="dropdown-menu dropdown-menu-light">
@@ -59,12 +83,7 @@ const MenuBar = () => {
                                     </ul>
                                 </div>
                             </div>
-                            <a href="#" className="list-group-item list-group-item-action py-2 ripple"><i
-                                className="fa fa-users fa-fw me-3"></i><span>Users</span></a>
-                            <a href="#" className="list-group-item list-group-item-action py-2 ripple"><i
-                                className="fa fa-money-bill fa-fw me-3"></i><span>Sales</span></a>
-                        </div>
-                    </div>
+                             </div>
                 </nav>
 
             </header>
