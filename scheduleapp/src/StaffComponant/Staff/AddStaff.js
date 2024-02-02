@@ -22,7 +22,6 @@ const AddStaff = () => {
   const addStaffDetails = (e) => {
     e.preventDefault(); // Prevent the default form submission
     console.log(addstaff);
-
     addStaffRecords(addstaff);
   };
 

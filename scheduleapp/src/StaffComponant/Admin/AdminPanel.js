@@ -9,6 +9,7 @@ import ClassRoomList from '../Classroom/ClassRoomList';
 import Schedule from '../ScheduleController/Schedule';
 import AddSubject from '../Subjects/AddSubject';
 import SubjectList from '../Subjects/SubjectList';
+import MainDashboard from './MainDashboard';
 
 const AdminPanel = () => {
   return (
@@ -25,6 +26,7 @@ const AdminPanel = () => {
           <Route path='/classroomlist' element={<ClassRoomList/>}/>
           <Route path='/addsubject' element={<AddSubject/>}/>
           <Route path='/subjectlist' element={<SubjectList/>}/>
+          <Route path='maindashboard' element={<MainDashboard/>}/>
       
         </Routes>
       </Col>
