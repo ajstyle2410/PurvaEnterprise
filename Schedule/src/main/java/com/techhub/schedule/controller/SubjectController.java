@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.techhub.schedule.model.Subject;
 import com.techhub.schedule.service.StaffService;
 
@@ -25,7 +24,7 @@ public class SubjectController {
 	 @PostMapping("addsubject")
 	  public Subject  addSubjectRecords(@RequestBody Subject subject)
 	  {
-		   System.out.println(subject.toString());
+		//   System.out.println(subject.toString());
 		   
 		  return    service.addSubjectRecords(subject);
 	  }

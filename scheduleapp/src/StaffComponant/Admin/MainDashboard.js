@@ -128,7 +128,6 @@ const MainDashboard = () => {
       {Array.isArray(classroom) &&
             classroom.map((classs) => (
                 <div class="col">
-
                 <div class="card">
                 <div class="card-body d-grid gap-3">
                 <span class="card-title"><span> ClassRoom Id :</span>{classs.classId}</span>

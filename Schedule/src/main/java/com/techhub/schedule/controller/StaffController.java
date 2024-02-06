@@ -27,7 +27,7 @@ public class StaffController {
 		List<Staff> list = new ArrayList<Staff>();
 		list = staffService.addStaffRecords();
 		if (!list.isEmpty()) {
-			System.out.println(list.toString());
+			//System.out.println(list.toString());
 			//return new ResponseEntity<Staff>(HttpStatus.OK);
 		}
 		//return new ResponseEntity<Staff>( (Staff) list, HttpStatus.NOT_FOUND);

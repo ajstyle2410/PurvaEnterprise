@@ -1,6 +1,6 @@
 package com.techhub.schedule.service;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.techhub.schedule.model.ClassRoom;
+import com.techhub.schedule.model.SchedulePage;
 import com.techhub.schedule.model.Staff;
 import com.techhub.schedule.model.Subject;
 import com.techhub.schedule.repository.ClassRoomRepository;
+import com.techhub.schedule.repository.ScheduleRepository;
 import com.techhub.schedule.repository.StaffRepository;
 import com.techhub.schedule.repository.SubjectRepository;
 
@@ -26,6 +28,9 @@ public class StaffService {
 	@Autowired
 	SubjectRepository subjectRepository;
 
+	@Autowired
+	ScheduleRepository scheduleRepository;
+	
 	public List<Staff> addStaffRecords() {
 		return staffRepository.findAll();
 	}
@@ -73,18 +78,27 @@ public class StaffService {
 	}
 
 	public List<Subject> subjectAllRecords() {
-		return  subjectRepository.findAll();
+		return subjectRepository.findAll();
 	}
 
-	public boolean  deleteSubjectRecords(int subjectid) {
-        
-		  try {
-		 subjectRepository.deleteById(subjectid);
-		 return true;
-		  }catch(Exception ex)
-		  {
-			  return false;
-		  }
-		  }
+	public boolean deleteSubjectRecords(int subjectid) {
+
+		try {
+			subjectRepository.deleteById(subjectid);
+			return true;
+		} catch (Exception ex) {
+			return false;
+		}
+	}
+
+	public boolean  addScheduleRecords(SchedulePage schedulePage) {
+      try {
+		scheduleRepository.save(schedulePage);
+		return true;
+      }catch(Exception ex)
+      {
+    	  return false;
+      }
+	}
 
 }

@@ -27,7 +27,6 @@ const AdminPanel = () => {
           <Route path='/addsubject' element={<AddSubject/>}/>
           <Route path='/subjectlist' element={<SubjectList/>}/>
           <Route path='maindashboard' element={<MainDashboard/>}/>
-      
         </Routes>
       </Col>
     </Row>

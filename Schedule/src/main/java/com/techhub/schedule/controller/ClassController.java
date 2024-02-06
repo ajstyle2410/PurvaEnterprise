@@ -31,7 +31,7 @@ public class ClassController {
 	@PostMapping("addclassroom")
 	 public  ResponseEntity<String> addClassRoomRecords(@RequestBody ClassRoom classRoom)
 	 {
-		  System.err.println(classRoom.toString());
+		//  System.err.println(classRoom.toString());
 		   if(classRoom.getClassRoomNo().isEmpty())
 		   {
 			   return  ResponseEntity.badRequest().body("data not feched from server ......");
@@ -45,7 +45,7 @@ public class ClassController {
 	@DeleteMapping("deleteclass/{deleterecordsbyId}")
 	 public ResponseEntity<String> deleteClassRecords(@PathVariable("deleterecordsbyId")  int deleterecordsbyId)
 	 {
-		  System.out.println("Delete id is :"+deleterecordsbyId);
+		//  System.out.println("Delete id is :"+deleterecordsbyId);
 		 if(deleterecordsbyId>0)
 		 {
 			  staffService.deleteClassRoomRecords(deleterecordsbyId);
