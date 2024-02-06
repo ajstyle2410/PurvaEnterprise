@@ -44,7 +44,7 @@ const Schedule = () => {
   const scheduleRecords = async (e) => {
     e.preventDefault();
     console.warn(schedule);
-    await schedularDetails(schedule);
+ schedularDetails(schedule);
   };
 
   const schedularDetails = (data) => {
