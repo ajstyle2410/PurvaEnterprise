@@ -11,6 +11,7 @@ const Schedule = () => {
   const [subject, SetSubject] = useState([]);
   const [schedule, SetSchedule] = useState([]);
 
+  var arr=[];
   useEffect(() => {
     document.title = "Schedule page 📅📅📅";
     showStaffList();
@@ -73,25 +74,19 @@ const Schedule = () => {
       selectedOptions = value;
     }
   
+    // Update the selected staff with the new value
     const updatedSelectedStaff = {
       ...selectedStaff,
       [name]: selectedOptions
     };
   
-    const updatedStaff = staff.map(course => {
-      if (course.staffId === staffId) {
-        return updatedSelectedStaff;
-      }
-      return course;
-    });
-  
-    SetSchedule(updatedStaff); // Update state with all staff data
-     console.log("===>" +JSON.stringify(updatedStaff));
+    // Store the updated staff data into a JSON object
+    const updatedStaffJSON = JSON.stringify(updatedSelectedStaff);
   
     // Filter subjects for the selected staff
     const filteredSubjects = subject.filter(data => updatedSelectedStaff.subjectName.includes(data.subjectName));
-      console.log(filteredSubjects);
-    SetSchedule(filteredSubjects);
+    console.log(filteredSubjects);
+  
   };
 
   return (
