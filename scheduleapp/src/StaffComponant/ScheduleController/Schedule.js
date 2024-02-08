@@ -11,7 +11,7 @@ const Schedule = () => {
   const [subject, SetSubject] = useState([]);
   const [schedule, SetSchedule] = useState([]);
 
-  var arr=[];
+  var arr = [];
   useEffect(() => {
     document.title = "Schedule page 📅📅📅";
     showStaffList();
@@ -45,10 +45,11 @@ const Schedule = () => {
   const scheduleRecords = async (e) => {
     e.preventDefault();
     console.warn(schedule);
-   schedularDetails(schedule);
+    schedularDetails(schedule);
   };
 
   const schedularDetails = (data) => {
+    console.log(data);
     axios.post(`${schedule_api}/schedulerecords`, data).then(
       (response) => {
         toast.success("Added Schedule Records");
@@ -60,33 +61,24 @@ const Schedule = () => {
   };
   const scheduleHandler = (e, staffId) => {
     const { name, value } = e.target;
-    const selectedStaff = staff.find(course => course.staffId === staffId);
+    const selectedStaff = staff.find((course) => course.staffId === staffId);
     if (!selectedStaff) return; // Handle if staffId is not found
-  
-    // Check if the input element is a multiple select
-    const isMultipleSelect = e.target.multiple;
-  
-    // If it's a multiple select, get all selected options
-    let selectedOptions;
-    if (isMultipleSelect) {
-      selectedOptions = Array.from(e.target.selectedOptions).map(option => option.value);
-    } else {
-      selectedOptions = value;
-    }
-  
+
+    let selectedOptions = value;
+
     // Update the selected staff with the new value
     const updatedSelectedStaff = {
       ...selectedStaff,
-      [name]: selectedOptions
+      [name]: selectedOptions,
     };
-  
-    // Store the updated staff data into a JSON object
-    const updatedStaffJSON = JSON.stringify(updatedSelectedStaff);
-  
-    // Filter subjects for the selected staff
-    const filteredSubjects = subject.filter(data => updatedSelectedStaff.subjectName.includes(data.subjectName));
-    console.log(filteredSubjects);
-  
+
+    updateSchedule(updatedSelectedStaff);
+  };
+
+  const updateSchedule = (updatedSchedule) => {
+    SetSchedule((prevSchedule) => {
+      return { ...prevSchedule, updatedSchedule };
+    });
   };
 
   return (
@@ -98,10 +90,10 @@ const Schedule = () => {
           <div className="col-4">
             <Input
               type="date"
-              id="todayDate"
               className="my-3 me-5 "
-              name="TodayDate"
+              name="todayDate"
               value={schedule.todayDate}
+              onChange={(e) => scheduleHandler(e, course.staffId)}
             ></Input>
           </div>
         </div>
@@ -117,148 +109,148 @@ const Schedule = () => {
               <th scope="col">4.00-6.00</th>
             </tr>
           </thead>
-         
-<tbody>
-  {Array.isArray(staff) &&
-    staff.map((course) => (
-      <tr key={course.staffId}>
-        <th scope="col">
-          <Input
-            name="staffName"
-            value={course.staffName}
-            onChange={(e) => scheduleHandler(e, course.staffId)}
-            disabled
-            id="staffName"
-          />
-          <Input
-            name="staffId"
-            value={course.staffId}
-            type="hidden"
-            id="staffId"
-          />
-        </th>
-        <td>
-          <select
-            className="form-select form-select-sm"
-            aria-label="Small select example"
-            onChange={(e) => scheduleHandler(e, course.staffId)}
-            name="subjectName"
-            value={course.subjectName}
-          >
-            {Array.isArray(subject) &&
-              subject.map((data) => (
-                <option
-                  key={data.subjectName}
-                  value={data.subjectName}
-                >
-                  {data.subjectName}
-                </option>
+
+          <tbody>
+            {Array.isArray(staff) &&
+              staff.map((course) => (
+                <tr key={course.staffId}>
+                  <th scope="col">
+                    <Input
+                      name="staffName"
+                      value={course.staffName}
+                      onChange={(e) => scheduleHandler(e, course.staffId)}
+                      disabled
+                      id="staffName"
+                    />
+                    <Input
+                      name="staffId"
+                      value={course.staffId}
+                      type="hidden"
+                      id="staffId"
+                    />
+                  </th>
+                  <td>
+                    <select
+                      className="form-select form-select-sm"
+                      aria-label="Small select example"
+                      onChange={(e) => scheduleHandler(e, course.staffId)}
+                      name="firstSchedule"
+                      value={course.subjectName}
+                    >
+                      {Array.isArray(subject) &&
+                        subject.map((data) => (
+                          <option
+                            key={data.subjectName}
+                            value={data.subjectName}
+                          >
+                            {data.subjectName}
+                          </option>
+                        ))}
+                    </select>
+                  </td>
+                  <td>
+                    <select
+                      className="form-select form-select-sm"
+                      aria-label="Small select example"
+                      onChange={(e) => scheduleHandler(e, course.staffId)}
+                      name="secondSchedule"
+                      value={course.subjectName}
+                    >
+                      {Array.isArray(subject) &&
+                        subject.map((data) => (
+                          <option
+                            key={data.subjectName}
+                            value={data.subjectName}
+                          >
+                            {data.subjectName}
+                          </option>
+                        ))}
+                    </select>
+                  </td>
+                  <td>
+                    <select
+                      className="form-select form-select-sm"
+                      aria-label="Small select example"
+                      onChange={(e) => scheduleHandler(e, course.staffId)}
+                      name="thridSchedule"
+                      value={course.subjectName}
+                    >
+                      {Array.isArray(subject) &&
+                        subject.map((data) => (
+                          <option
+                            key={data.subjectName}
+                            value={data.subjectName}
+                          >
+                            {data.subjectName}
+                          </option>
+                        ))}
+                    </select>
+                  </td>
+                  <td>
+                    <select
+                      className="form-select form-select-sm"
+                      aria-label="Small select example"
+                      onChange={(e) => scheduleHandler(e, course.staffId)}
+                      name="fourthSchedule"
+                      value={course.subjectName}
+                    >
+                      {Array.isArray(subject) &&
+                        subject.map((data) => (
+                          <option
+                            key={data.subjectName}
+                            value={data.subjectName}
+                          >
+                            {data.subjectName}
+                          </option>
+                        ))}
+                    </select>
+                  </td>
+                  <td>
+                    <select
+                      className="form-select form-select-sm"
+                      aria-label="Small select example"
+                      onChange={(e) => scheduleHandler(e, course.staffId)}
+                      name="fifthSchedule"
+                      value={course.subjectName}
+                    >
+                      {Array.isArray(subject) &&
+                        subject.map((data) => (
+                          <option
+                            key={data.subjectName}
+                            value={data.subjectName}
+                          >
+                            {data.subjectName}
+                          </option>
+                        ))}
+                    </select>
+                  </td>
+                  <td>
+                    <select
+                      className="form-select form-select-sm"
+                      aria-label="Small select example"
+                      onChange={(e) => scheduleHandler(e, course.staffId)}
+                      name="sixthSchedule"
+                      value={course.subjectName}
+                    >
+                      {Array.isArray(subject) &&
+                        subject.map((data) => (
+                          <option
+                            key={data.subjectName}
+                            value={data.subjectName}
+                          >
+                            {data.subjectName}
+                          </option>
+                        ))}
+                    </select>
+                  </td>
+                  <td>
+                    <Button type="submit" id="sub" className="btn btn-primary">
+                      Go somewhere
+                    </Button>
+                  </td>
+                </tr>
               ))}
-          </select>
-        </td>
-        <td>
-          <select
-            className="form-select form-select-sm"
-            aria-label="Small select example"
-            onChange={(e) => scheduleHandler(e, course.staffId)}
-            name="subjectName"
-            value={course.subjectName}
-          >
-            {Array.isArray(subject) &&
-              subject.map((data) => (
-                <option
-                  key={data.subjectName}
-                  value={data.subjectName}
-                >
-                  {data.subjectName}
-                </option>
-              ))}
-          </select>
-        </td>
-        <td>
-          <select
-            className="form-select form-select-sm"
-            aria-label="Small select example"
-            onChange={(e) => scheduleHandler(e, course.staffId)}
-            name="subjectName"
-            value={course.subjectName}
-          >
-            {Array.isArray(subject) &&
-              subject.map((data) => (
-                <option
-                  key={data.subjectName}
-                  value={data.subjectName}
-                >
-                  {data.subjectName}
-                </option>
-              ))}
-          </select>
-        </td>
-        <td>
-          <select
-            className="form-select form-select-sm"
-            aria-label="Small select example"
-            onChange={(e) => scheduleHandler(e, course.staffId)}
-            name="subjectName"
-            value={course.subjectName}
-          >
-            {Array.isArray(subject) &&
-              subject.map((data) => (
-                <option
-                  key={data.subjectName}
-                  value={data.subjectName}
-                >
-                  {data.subjectName}
-                </option>
-              ))}
-          </select>
-        </td>
-        <td>
-          <select
-            className="form-select form-select-sm"
-            aria-label="Small select example"
-            onChange={(e) => scheduleHandler(e, course.staffId)}
-            name="subjectName"
-            value={course.subjectName}
-          >
-            {Array.isArray(subject) &&
-              subject.map((data) => (
-                <option
-                  key={data.subjectName}
-                  value={data.subjectName}
-                >
-                  {data.subjectName}
-                </option>
-              ))}
-          </select>
-        </td>
-        <td>
-          <select
-            className="form-select form-select-sm"
-            aria-label="Small select example"
-            onChange={(e) => scheduleHandler(e, course.staffId)}
-            name="subjectName"
-            value={course.subjectName}
-          >
-            {Array.isArray(subject) &&
-              subject.map((data) => (
-                <option
-                  key={data.subjectName}
-                  value={data.subjectName}
-                >
-                  {data.subjectName}
-                </option>
-              ))}
-          </select>
-        </td>
-        <td>
-          <Button type="submit" id="sub" className="btn btn-primary">
-            Go somewhere
-          </Button>
-        </td>
-      </tr>
-    ))}
-</tbody>
+          </tbody>
         </table>
         <div className="card">
           <div className="card-body text-center">

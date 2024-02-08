@@ -18,25 +18,16 @@ import lombok.ToString;
 public class SchedulePage {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+ 	@Column(nullable = false)
      private int ScheduleId;
- 	@Column(nullable = false)
 	private String StaffName;
- 	@Column(nullable = false)
  	private int StaffId;
- 	@Column(nullable = false)
 	   private String FirstSchedule;
- 	@Column(nullable = false)
  	private String SecondSchedule;
- 	@Column(nullable = false)
  	private String ThridSchedule;
- 	@Column(nullable = false)
  	 private String FourthSchedule;
- 	@Column(nullable = false)
  	 private String FifthSchedule;
- 	@Column(nullable = false)
  	 private String SixthSchedule;
- 	@Column(nullable = false)
  	 private String ExtraSchedule;
- 	@Column(nullable = false)
  	private String TodayDate;
 }
