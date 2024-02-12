@@ -1,6 +1,7 @@
 package com.techhub.schedule.service;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,6 +100,17 @@ public class StaffService {
       {
     	  return false;
       }
+	}
+
+	public List<SchedulePage> fetchScheduleDetails() {
+        List<SchedulePage> list = new ArrayList<SchedulePage>();
+        try {
+		     list = scheduleRepository.findAll();
+		     return list;
+	}catch(Exception ex)
+        {
+		 return null;
+        }
 	}
 
 }

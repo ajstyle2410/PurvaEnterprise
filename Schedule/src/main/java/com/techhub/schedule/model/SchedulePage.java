@@ -20,14 +20,14 @@ public class SchedulePage {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
  	@Column(nullable = false)
      private int ScheduleId;
-	private String StaffName;
- 	private int StaffId;
-	   private String FirstSchedule;
- 	private String SecondSchedule;
- 	private String ThridSchedule;
+	 private String StaffName;
+ 	 private int StaffId;
+   	 private String FirstSchedule;
+ 	 private String SecondSchedule;
+ 	 private String ThridSchedule;
  	 private String FourthSchedule;
  	 private String FifthSchedule;
  	 private String SixthSchedule;
  	 private String ExtraSchedule;
- 	private String TodayDate;
+ 	 private String TodayDate;
 }

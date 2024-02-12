@@ -7,17 +7,27 @@ import subject_api from "../ScheduleAPIS/SubjectApi";
 import schedule_api from "../ScheduleAPIS/ScheduleApi";
 
 const Schedule = () => {
+  // ************************* useStates******************************************
   const [staff, setStaffList] = useState([]);
   const [subject, SetSubject] = useState([]);
-  const [schedule, SetSchedule] = useState([]);
+  const [schedule, setSchedule] = useState({
+    staffId: "",
+    todayDate: "",
+    firstSchedule: "",
+    secondSchedule: "",
+    thridSchedule : "",
+    fourthSchedule: "",
+    fifthSchedule: "",
+    sixthSchedule: ""
+    });
 
-  var arr = [];
   useEffect(() => {
     document.title = "Schedule page 📅📅📅";
     showStaffList();
     subjectList();
   }, []);
 
+  /********************** Staff Records ***************************** */
   const showStaffList = () => {
     axios.get(`${staff_api}/staffrecords`).then(
       (response) => {
@@ -29,6 +39,7 @@ const Schedule = () => {
       }
     );
   };
+  /*************************Subject Records ***************************************/
 
   const subjectList = () => {
     axios.get(`${subject_api}/subjectlist`).then(
@@ -41,50 +52,33 @@ const Schedule = () => {
       }
     );
   };
+  /*************************Schedule Records *********************** */
 
-  const scheduleRecords = async (e) => {
-    e.preventDefault();
-    console.warn(schedule);
-    schedularDetails(schedule);
-  };
-
-  const schedularDetails = (data) => {
-    console.log(data);
-    axios.post(`${schedule_api}/schedulerecords`, data).then(
-      (response) => {
-        toast.success("Added Schedule Records");
-      },
-      (error) => {
-        toast.error("Something went wrong...");
-      }
-    );
-  };
-  const scheduleHandler = (e, staffId) => {
+  const scheduleHandler = (e) => {
     const { name, value } = e.target;
-    const selectedStaff = staff.find((course) => course.staffId === staffId);
-    if (!selectedStaff) return; // Handle if staffId is not found
 
-    let selectedOptions = value;
-
-    // Update the selected staff with the new value
-    const updatedSelectedStaff = {
-      ...selectedStaff,
-      [name]: selectedOptions,
-    };
-
-    updateSchedule(updatedSelectedStaff);
+   
+      setSchedule((prevSchedule) => ({
+        ...prevSchedule,
+        [name]: value,
+      }));
   };
 
-  const updateSchedule = (updatedSchedule) => {
-    SetSchedule((prevSchedule) => {
-      return { ...prevSchedule, updatedSchedule };
-    });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+      console.log(schedule);
+    await axios.post(`${schedule_api}/schedulerecords`, schedule)
+      .then((response) => {
+        console.log("Form submitted successfully:", response.data);
+            })
+      .catch((error) => {
+        console.error("Error submitting form:", error);
+      });
   };
 
   return (
     <div className="container">
-      <ToastContainer />
-      <Form onSubmit={scheduleRecords}>
+      <Form onSubmit={handleSubmit}>
         <div className="row">
           <div className="col-8"></div>
           <div className="col-4">
@@ -93,7 +87,7 @@ const Schedule = () => {
               className="my-3 me-5 "
               name="todayDate"
               value={schedule.todayDate}
-              onChange={(e) => scheduleHandler(e, course.staffId)}
+              onChange={scheduleHandler}
             ></Input>
           </div>
         </div>
@@ -111,31 +105,34 @@ const Schedule = () => {
           </thead>
 
           <tbody>
-            {Array.isArray(staff) &&
-              staff.map((course) => (
-                <tr key={course.staffId}>
-                  <th scope="col">
-                    <Input
-                      name="staffName"
-                      value={course.staffName}
-                      onChange={(e) => scheduleHandler(e, course.staffId)}
-                      disabled
-                      id="staffName"
-                    />
-                    <Input
-                      name="staffId"
-                      value={course.staffId}
-                      type="hidden"
-                      id="staffId"
-                    />
-                  </th>
-                  <td>
+            {
+            
+            Array.isArray(staff) &&
+              staff.map((record) => (
+                <tr key={record.staffId}>
+                <th scope="col">
+                      <Input
+                        name="staffName"
+                        value={record.staffName}
+                        onClick={scheduleHandler}
+                        disabled
+                      />
+                      <Input
+                        name="staffId"
+                        value={record.staffId}
+                        type="text"
+                        disabled
+                        onClick={(e) => scheduleHandler(e, record.staffId)}
+                        id="staffId"
+                      />
+                    </th>
+                    <td>
                     <select
                       className="form-select form-select-sm"
                       aria-label="Small select example"
-                      onChange={(e) => scheduleHandler(e, course.staffId)}
+                      onClick={(e) => scheduleHandler(e, record.staffId)}
                       name="firstSchedule"
-                      value={course.subjectName}
+                      value={record.firstSchedule}
                     >
                       {Array.isArray(subject) &&
                         subject.map((data) => (
@@ -152,9 +149,9 @@ const Schedule = () => {
                     <select
                       className="form-select form-select-sm"
                       aria-label="Small select example"
-                      onChange={(e) => scheduleHandler(e, course.staffId)}
                       name="secondSchedule"
-                      value={course.subjectName}
+                      onClick={(e) => scheduleHandler(e, record.staffId)}                      name="secondSchedule"
+                      value={record.secondSchedule}
                     >
                       {Array.isArray(subject) &&
                         subject.map((data) => (
@@ -171,9 +168,9 @@ const Schedule = () => {
                     <select
                       className="form-select form-select-sm"
                       aria-label="Small select example"
-                      onChange={(e) => scheduleHandler(e, course.staffId)}
+                      onClick={(e) => scheduleHandler(e, record.staffId)}
                       name="thridSchedule"
-                      value={course.subjectName}
+                      value={record.thridSchedule}
                     >
                       {Array.isArray(subject) &&
                         subject.map((data) => (
@@ -190,9 +187,9 @@ const Schedule = () => {
                     <select
                       className="form-select form-select-sm"
                       aria-label="Small select example"
-                      onChange={(e) => scheduleHandler(e, course.staffId)}
+                      onClick={(e) => scheduleHandler(e, record.staffId)}
                       name="fourthSchedule"
-                      value={course.subjectName}
+                      value={record.fourthSchedule}
                     >
                       {Array.isArray(subject) &&
                         subject.map((data) => (
@@ -209,9 +206,9 @@ const Schedule = () => {
                     <select
                       className="form-select form-select-sm"
                       aria-label="Small select example"
-                      onChange={(e) => scheduleHandler(e, course.staffId)}
+                      onClick={(e) => scheduleHandler(e, record.staffId)}
                       name="fifthSchedule"
-                      value={course.subjectName}
+                      value={record.fifthSchedule}
                     >
                       {Array.isArray(subject) &&
                         subject.map((data) => (
@@ -228,9 +225,28 @@ const Schedule = () => {
                     <select
                       className="form-select form-select-sm"
                       aria-label="Small select example"
-                      onChange={(e) => scheduleHandler(e, course.staffId)}
+                      onClick={(e) => scheduleHandler(e, record.staffId)}
+                      name="fifthSchedule"
+                      value={record.fifthSchedule}
+                    >
+                      {Array.isArray(subject) &&
+                        subject.map((data) => (
+                          <option
+                            key={data.subjectName}
+                            value={data.subjectName}
+                          >
+                            {data.subjectName}
+                          </option>
+                        ))}
+                    </select>
+                  </td>
+                  <td>
+                    <select
+                      className="form-select form-select-sm"
+                      aria-label="Small select example"
+                      onClick={(e) => scheduleHandler(e, record.staffId)}
                       name="sixthSchedule"
-                      value={course.subjectName}
+                      value={record.sixthSchedule}
                     >
                       {Array.isArray(subject) &&
                         subject.map((data) => (
@@ -259,6 +275,7 @@ const Schedule = () => {
             </Button>
           </div>
         </div>
+        <ToastContainer />
       </Form>
     </div>
   );
