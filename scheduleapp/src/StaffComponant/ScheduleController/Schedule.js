@@ -10,16 +10,7 @@ const Schedule = () => {
   // ************************* useStates******************************************
   const [staff, setStaffList] = useState([]);
   const [subject, SetSubject] = useState([]);
-  const [schedule, setSchedule] = useState({
-    staffId: "",
-    todayDate: "",
-    firstSchedule: "",
-    secondSchedule: "",
-    thridSchedule : "",
-    fourthSchedule: "",
-    fifthSchedule: "",
-    sixthSchedule: ""
-    });
+  const [schedule, setSchedule] = useState([]);
 
   useEffect(() => {
     document.title = "Schedule page 📅📅📅";
@@ -70,11 +61,20 @@ const Schedule = () => {
     await axios.post(`${schedule_api}/schedulerecords`, schedule)
       .then((response) => {
         console.log("Form submitted successfully:", response.data);
+        clearRecords();
+
             })
       .catch((error) => {
         console.error("Error submitting form:", error);
       });
   };
+
+    const clearRecords=()=>
+    {
+      setSchedule([]);
+      alert("data cleard");
+       console.log(schedule)
+    }
 
   return (
     <div className="container">
@@ -121,7 +121,7 @@ const Schedule = () => {
                         name="staffId"
                         value={record.staffId}
                         type="text"
-                        disabled
+                        hidden
                         onClick={(e) => scheduleHandler(e, record.staffId)}
                         id="staffId"
                       />
@@ -134,6 +134,7 @@ const Schedule = () => {
                       name="firstSchedule"
                       value={record.firstSchedule}
                     >
+                      <option>Select</option>
                       {Array.isArray(subject) &&
                         subject.map((data) => (
                           <option
@@ -150,9 +151,11 @@ const Schedule = () => {
                       className="form-select form-select-sm"
                       aria-label="Small select example"
                       name="secondSchedule"
-                      onClick={(e) => scheduleHandler(e, record.staffId)}                      name="secondSchedule"
+                      onChange={(e) => scheduleHandler(e, record.staffId)}                     
                       value={record.secondSchedule}
                     >
+                                            <option>Select</option>
+
                       {Array.isArray(subject) &&
                         subject.map((data) => (
                           <option
@@ -172,6 +175,8 @@ const Schedule = () => {
                       name="thridSchedule"
                       value={record.thridSchedule}
                     >
+                                            <option>Select</option>
+
                       {Array.isArray(subject) &&
                         subject.map((data) => (
                           <option
@@ -191,12 +196,15 @@ const Schedule = () => {
                       name="fourthSchedule"
                       value={record.fourthSchedule}
                     >
+                      <option>Select</option>
+
                       {Array.isArray(subject) &&
                         subject.map((data) => (
                           <option
                             key={data.subjectName}
                             value={data.subjectName}
                           >
+
                             {data.subjectName}
                           </option>
                         ))}
@@ -229,8 +237,11 @@ const Schedule = () => {
                       name="fifthSchedule"
                       value={record.fifthSchedule}
                     >
+                                            <option>Select</option>
+
                       {Array.isArray(subject) &&
                         subject.map((data) => (
+                          
                           <option
                             key={data.subjectName}
                             value={data.subjectName}
@@ -248,6 +259,8 @@ const Schedule = () => {
                       name="sixthSchedule"
                       value={record.sixthSchedule}
                     >
+                                            <option>Select</option>
+
                       {Array.isArray(subject) &&
                         subject.map((data) => (
                           <option
@@ -261,7 +274,7 @@ const Schedule = () => {
                   </td>
                   <td>
                     <Button type="submit" id="sub" className="btn btn-primary">
-                      Go somewhere
+                      <span>   {record.staffId} Send </span>
                     </Button>
                   </td>
                 </tr>

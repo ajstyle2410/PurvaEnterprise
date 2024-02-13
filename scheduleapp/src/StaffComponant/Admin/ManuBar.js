@@ -37,6 +37,7 @@ const MenuBar = () => {
                 </Link>
 
                 <div class="btn-group dropend mt-3">
+
                   <Button
                     type="button"
                     class="btn btn-light dropdown-toggle"
@@ -44,7 +45,9 @@ const MenuBar = () => {
                     aria-expanded="false"
                     data-bs-auto-close="outside"
                   >
-                    STAFF RECORDS
+                    <i class="fa fa-user-o me-1 fa-1x" aria-hidden="true"></i>   FACULTY RECORDS
+
+                 
                   </Button>
                   <ul class="dropdown-menu dropdown-menu-light">
                     <li>
@@ -53,7 +56,7 @@ const MenuBar = () => {
                         to="/stafflist"
                         element={StaffList}
                       >
-                        Staff List
+                        Faculty List
                       </Link>
                     </li>
                     <li>
@@ -63,7 +66,9 @@ const MenuBar = () => {
                           to="/addstaff"
                           element={AddStaff}
                         >
-                          Add Staff
+                          <i class="fa fa-user" aria-hidden="true">Add Faculty</i>
+
+                          
                         </Link>
                       </li>
                     </li>{" "}
@@ -82,7 +87,8 @@ const MenuBar = () => {
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                     data-bs-auto-close="outside"
-                  >
+                  ><i class="fa fa-regular fa-building-columns"></i>
+
                     ClASSROOM
                   </Button>
                   <ul class="dropdown-menu dropdown-menu-light">
@@ -121,7 +127,7 @@ const MenuBar = () => {
                     aria-expanded="false"
                     data-bs-auto-close="outside"
                   >
-                    SUBJECT
+<i class=" fa   fa-light fa-book"></i>                    SUBJECT
                   </Button>
                   <ul class="dropdown-menu dropdown-menu-light">
                     <li>
