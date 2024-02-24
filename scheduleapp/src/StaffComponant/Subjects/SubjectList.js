@@ -58,10 +58,10 @@ const SubjectList = () => {
           {Array.isArray(subject) &&
             subject.map((data) => (
               <tr>
-                <td scope="col">{data.subjectId}</td>
-                <td scope="col">{data.subjectName}</td>
+                <th scope="col">{data.subjectId}</th>
+                <th scope="col">{data.subjectName}</th>
                 
-                <td scope="col">
+                <th scope="col">
                   <button className="btn" type="submit">
                     {" "}
                     <i
@@ -78,7 +78,7 @@ const SubjectList = () => {
                       aria-hidden="true"
                     ></i>
                   </button>
-                </td>
+                </th>
                 <td></td>
                 <td></td>
                 <td></td>

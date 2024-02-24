@@ -4,9 +4,9 @@ import { Form, Input } from "reactstrap";
 import classroom_api from "../ScheduleAPIS/ClassRoom_api";
 import { ToastContainer, toast } from "react-toastify";
 const AddClassRoom = () => {
-  useEffect = () => {
+  useEffect = (() => {
     document.title = "Add Classrooms 😉😉";
-  };
+  },[]);
 
   const [addclassroom, SetAddClassRooms] = useState([]);
 

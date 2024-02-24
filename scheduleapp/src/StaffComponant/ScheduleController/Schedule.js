@@ -45,34 +45,63 @@ const Schedule = () => {
   };
   /*************************Schedule Records *********************** */
 
+    var jsonArray=[];
   const scheduleHandler = (e) => {
     const { name, value } = e.target;
-
-   
-      setSchedule((prevSchedule) => ({
-        ...prevSchedule,
-        [name]: value,
-      }));
+    setSchedule((prevSchedule) => ({
+      ...prevSchedule,
+      [name]: value,
+     
+    }));
   };
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-      console.log(schedule);
-    await axios.post(`${schedule_api}/schedulerecords`, schedule)
-      .then((response) => {
-        console.log("Form submitted successfully:", response.data);
-        clearRecords();
-
-            })
-      .catch((error) => {
-        console.error("Error submitting form:", error);
+  
+    // Check if a record already exists for the staff member
+    const existingRecordIndex = jsonArray.findIndex(
+      (record) => record.staffId === schedule.staffId
+    );
+  
+    if (existingRecordIndex === -1) {
+      // If no record exists, add a new one
+      jsonArray.push({
+        "firstSchedule": schedule.firstSchedule,
+        "secondSchedule": schedule.secondSchedule,
+        "thirdSchedule": schedule.thirdSchedule,
+        "fourthSchedule": schedule.fourthSchedule,
+        "fifthSchedule": schedule.fifthSchedule,
+        "sixthSchedule": schedule.sixthSchedule,
+        "todayDate": schedule.todayDate,
+        "staffName": schedule.staffName,
+        "staffId": schedule.staffId
       });
+      console.log("New record added:", jsonArray[jsonArray.length - 1]);
+    } else {
+      // If a record already exists, update it with the new schedule details
+      jsonArray[existingRecordIndex] = {
+        ...jsonArray[existingRecordIndex],
+        ...schedule
+      };
+      console.log("Record updated:", jsonArray[existingRecordIndex]);
+    }
+  
+    // Post the data to the server
+    try {
+      await axios.post(`${schedule_api}/schedulerecords`, schedule);
+      
+      console.log("Form submitted successfully");
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
   };
+  
 
     const clearRecords=()=>
     {
-      setSchedule([]);
-      alert("data cleard");
+      setSchedule([
+        
+      ]);
        console.log(schedule)
     }
 
@@ -82,13 +111,14 @@ const Schedule = () => {
         <div className="row">
           <div className="col-8"></div>
           <div className="col-4">
-            <Input
-              type="date"
-              className="my-3 me-5 "
-              name="todayDate"
-              value={schedule.todayDate}
-              onChange={scheduleHandler}
-            ></Input>
+          <Input
+  type="date"
+  className="my-3 me-5"
+  name="todayDate"
+  value={schedule.todayDate}
+  onChange={scheduleHandler}
+/>
+
           </div>
         </div>
         <table className="table table-striped-columns table-hover borderd m-2 text-center">
@@ -114,7 +144,7 @@ const Schedule = () => {
                       <Input
                         name="staffName"
                         value={record.staffName}
-                        onClick={scheduleHandler}
+                        onChange={scheduleHandler}
                         disabled
                       />
                       <Input
@@ -122,7 +152,7 @@ const Schedule = () => {
                         value={record.staffId}
                         type="text"
                         hidden
-                        onClick={(e) => scheduleHandler(e, record.staffId)}
+                        onChange={(e) => scheduleHandler(e, record.staffId)}
                         id="staffId"
                       />
                     </th>
@@ -218,6 +248,7 @@ const Schedule = () => {
                       name="fifthSchedule"
                       value={record.fifthSchedule}
                     >
+                      <option>Select</option>
                       {Array.isArray(subject) &&
                         subject.map((data) => (
                           <option
@@ -288,7 +319,6 @@ const Schedule = () => {
             </Button>
           </div>
         </div>
-        <ToastContainer />
       </Form>
     </div>
   );
